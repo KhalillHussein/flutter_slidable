@@ -20,6 +20,7 @@ class Slidable extends StatefulWidget {
   const Slidable({
     Key? key,
     this.groupTag,
+    this.clip,
     this.enabled = true,
     this.closeOnScroll = true,
     this.startActionPane,
@@ -100,6 +101,9 @@ class Slidable extends StatefulWidget {
   ///
   /// {@macro flutter.widgets.ProxyWidget.child}
   final Widget child;
+
+  ///Clip whenever out of bounds
+  final Clip? clip;
 
   @override
   _SlidableState createState() => _SlidableState();
@@ -238,6 +242,7 @@ class _SlidableState extends State<Slidable>
     );
 
     content = Stack(
+      clipBehavior: widget.clip ?? Clip.none,
       children: <Widget>[
         if (actionPane != null)
           Positioned.fill(
